@@ -22,11 +22,18 @@ namespace ZenS_Fontend_Test.Models
             }
         }
 
-        public ZenSDBEntities DB { get; set; }
+        //public ZenSDBEntities DB { get; set; }
+
+        //private DataProvider()
+        //{
+        //    DB = new ZenSDBEntities();
+        //}
+
+        public Repository DB { get; set; }
 
         private DataProvider()
         {
-            DB = new ZenSDBEntities();
+            DB = new Repository();
         }
     }
 }

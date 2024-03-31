@@ -19,7 +19,7 @@ namespace ZenS_Fontend_Test
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            if(DataProvider.Ins.DB.Jokes.Count() < 1)
+            if (DataProvider.Ins.DB.Jokes.Count() < 1)
             {
                 JokeService.InitalJoke();
             }
