@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZenSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Jokes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ViewJoke">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JokeId" Type="int" Nullable="false" />
+    <Property Name="ViewTime" Type="datetime" Nullable="false" />
+    <Property Name="Like" Type="bit" />
+  </EntityType>
+  <Association Name="FK__ViewJoke__JokeId__6FE99F9F">
+    <End Role="Jokes" Type="Self.Jokes" Multiplicity="1" />
+    <End Role="ViewJoke" Type="Self.ViewJoke" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jokes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ViewJoke">
+        <PropertyRef Name="JokeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ZenSDBModelStoreContainer">
+    <EntitySet Name="Jokes" EntityType="Self.Jokes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ViewJoke" EntityType="Self.ViewJoke" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ViewJoke__JokeId__6FE99F9F" Association="Self.FK__ViewJoke__JokeId__6FE99F9F">
+      <End Role="Jokes" EntitySet="Jokes" />
+      <End Role="ViewJoke" EntitySet="ViewJoke" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

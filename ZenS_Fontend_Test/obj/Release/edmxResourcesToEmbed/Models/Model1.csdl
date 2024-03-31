@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZenSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Joke">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ViewJokes" Relationship="ZenSDBModel.FK__ViewJoke__JokeId__6FE99F9F" FromRole="Joke" ToRole="ViewJoke" />
+  </EntityType>
+  <EntityContainer Name="ZenSDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Jokes" EntityType="Self.Joke" />
+    <EntitySet Name="ViewJokes" EntityType="ZenSDBModel.ViewJoke" />
+    <AssociationSet Name="FK__ViewJoke__JokeId__6FE99F9F" Association="ZenSDBModel.FK__ViewJoke__JokeId__6FE99F9F">
+      <End Role="Joke" EntitySet="Jokes" />
+      <End Role="ViewJoke" EntitySet="ViewJokes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ViewJoke">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JokeId" Type="Int32" Nullable="false" />
+    <Property Name="ViewTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Like" Type="Boolean" />
+    <NavigationProperty Name="Joke" Relationship="ZenSDBModel.FK__ViewJoke__JokeId__6FE99F9F" FromRole="ViewJoke" ToRole="Joke" />
+  </EntityType>
+  <Association Name="FK__ViewJoke__JokeId__6FE99F9F">
+    <End Type="ZenSDBModel.Joke" Role="Joke" Multiplicity="1" />
+    <End Type="ZenSDBModel.ViewJoke" Role="ViewJoke" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Joke">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ViewJoke">
+        <PropertyRef Name="JokeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
