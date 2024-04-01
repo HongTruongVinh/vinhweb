@@ -14,18 +14,18 @@
         </div>
     </div>
 
-    <div class="row container vinhcontainer">
-        <div class="row" style="height:auto;">
+    <div class="row container custom-container">
+        <div class="row">
             <div class="col d-flex justify-content-center align-items-center flex-column text-muted">
-                <p id="text-content" data-jokeid="@Model.Id" style="font-size: 18px; padding-top: 5vh; padding-bottom: 5vh;">
+                <p id="text-content" data-jokeid="@Model.Id" style="font-size: 18px; padding-bottom: 5vh; margin-top:50px">
                     @Model.Content
                 </p>
             </div>
         </div>
 
-        <hr class="row hr-custom" />
+        <hr class="row custom-hr" />
 
-        <div class="row" style="height:15vh;">
+        <div class="row" style="height:15vh; margin-bottom:25px; margin-top:25px">
             <div class="col d-flex justify-content-center align-items-center flex-row">
                 <button id="btnlike" class="left-button text-white border-0 like" type="button">This is Funny!</button>
                 <button class="right-button text-white dislike" type="button">This is not funny.</button>
@@ -46,10 +46,10 @@
             // button like clicked
             $(document).on('click', '.like', function () {
                 var jokeId = $('#text-content').data('jokeid');
-                
+
                 if (jokeId === -1) {
                     return AlertEndJoke();
-                } 
+                }
 
                 $.post('@Url.Action("Like", "Home")', { jokeId: jokeId })
                     .done(function (response) {
@@ -64,10 +64,10 @@
             // button dislike clicked
             $(document).on('click', '.dislike', function () {
                 var jokeId = $('#text-content').data('jokeid');
-                
+
                 if (jokeId === -1) {
                     return AlertEndJoke();
-                } 
+                }
 
                 $.post('@Url.Action("Dislike", "Home")', { jokeId: jokeId })
                     .done(function (response) {
